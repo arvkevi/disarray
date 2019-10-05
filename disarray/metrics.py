@@ -1,14 +1,14 @@
-__all_metrics__ =  [
+__all_metrics__ = [
     'accuracy',
     'f1',
+    'false_discovery_rate',
+    'false_positive_rate',
     'negative_predictive_value',
     'positive_predictive_value',
-    'sensitivity',
-    'true_positive_rate',
-    'recall',
     'precision',
-    'true_negative_rate',
+    'recall',
+    'sensitivity',
     'specificity',
-    'false_positive_rate',
-    'false_discovery_rate'
+    'true_negative_rate',
+    'true_positive_rate',
 ]
