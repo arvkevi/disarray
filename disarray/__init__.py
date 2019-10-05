@@ -20,7 +20,7 @@ class PandasConfusionMatrix:
             raise AttributeError("The input DataFrame must be an n x n square DataFrame")
         if not all([dt == int for dt in obj.dtypes]):
             raise AttributeError("The input DataFrame must contain only integers, but non-ints were detected.")
-        if not all(obj >= 0):
+        if not (obj >= 0).all(axis=None):
             raise AttributeError("The input DataFrame must contain all positive integers, but negative "
                                  "ints were detected.")
 
