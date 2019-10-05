@@ -2,6 +2,7 @@ __all_metrics__ = [
     'accuracy',
     'f1',
     'false_discovery_rate',
+    'false_negative_rate',
     'false_positive_rate',
     'negative_predictive_value',
     'positive_predictive_value',
