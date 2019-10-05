@@ -38,7 +38,7 @@ setup(
     ],
     keywords='machine learning-supervised learning',
     packages=find_packages(exclude=['docs', 'tests*']),
-    include_package_data=true,
+    include_package_data=True,
     author='Kevin Arvai',
     install_requires=install_requires,
     dependency_links=dependency_links,
