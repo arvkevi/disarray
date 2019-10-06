@@ -34,7 +34,7 @@ class PandasConfusionMatrix:
         """
         FP = obj.sum(axis=0) - np.diag(obj)
         FN = obj.sum(axis=1) - np.diag(obj)
-        TP = np.diag(obj)
+        TP = pd.Series(np.diag(obj), index=obj.index)
         TN = obj.values.sum() - (FP + FN + TP)
         return TP, FP, FN, TN
 
