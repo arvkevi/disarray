@@ -56,8 +56,8 @@ class PandasConfusionMatrix:
 
     @property
     def false_negative_rate(self):
-        """False negative rate  is defined as false negative / (true negative + true positive)"""
-        return self.FN / (self.TN + self.TP)
+        """False negative rate  is defined as false negative / (false negative + true positive)"""
+        return self.FN / (self.FN + self.TP)
 
     @property
     def false_positive_rate(self):
