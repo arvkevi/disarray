@@ -105,5 +105,76 @@ class PandasConfusionMatrix:
         return self.sensitivity
 
     @property
-    def all_metrics(self):
-        return pd.DataFrame({metric: getattr(self, metric) for metric in __all_metrics__}).T
+    def micro_accuracy(self):
+        """Accuracy is defined as (true positive + true negative) / (true positive + false positive + false negative +
+         true negative)"""
+        return (self.TP.sum() + self.TN.sum()) / (self.TP.sum() + self.FP.sum() + self.FN.sum() + self.TN.sum())
+
+    @property
+    def micro_f1(self):
+        """F1 is the harmonic mean of precision and sensitivity"""
+        return 2 * ((self.micro_precision * self.micro_sensitivity) / (self.micro_precision + self.micro_sensitivity))
+
+    @property
+    def micro_false_discovery_rate(self):
+        """False discovery rate is defined as false positive / (true positive + false positive)"""
+        return self.FP.sum() / (self.TP.sum() + self.FP.sum())
+
+    @property
+    def micro_false_negative_rate(self):
+        """False negative rate  is defined as false negative / (false negative + true positive)"""
+        return self.FN.sum() / (self.FN.sum() + self.TP.sum())
+
+    @property
+    def micro_false_positive_rate(self):
+        """False positive rate is defined as false positive / (false positive + true negative)"""
+        return self.FP.sum() / (self.FP.sum() + self.TN.sum())
+
+    @property
+    def micro_negative_predictive_value(self):
+        """Negative predictive value is defined as true negative / (true negative + false negative)"""
+        return self.TN.sum() / (self.TN.sum() + self.FN.sum())
+
+    @property
+    def micro_positive_predictive_value(self):
+        """Positive predictive value is defined as true positive / (true positive + false negative)"""
+        return self.TP.sum() / (self.TP.sum() + self.FN.sum())
+
+    @property
+    def micro_precision(self):
+        """Precision is defined as true positive / (true positive + false negative)"""
+        return self.TP.sum() / (self.TP.sum() + self.FP.sum())
+
+    @property
+    def micro_recall(self):
+        """Recall is defined as true Positive / (true positive + false negative)"""
+        return self.TP.sum() / (self.TP.sum() + self.FN.sum())
+
+    @property
+    def micro_sensitivity(self):
+        """Sensitivity is defined as true Positive / (true positive + false negative)"""
+        return self.TP.sum() / (self.TP.sum() + self.FN.sum())
+
+    @property
+    def micro_specificity(self):
+        """Specificity is defined as true negative / (true negative + false positive)"""
+        return self.TN.sum() / (self.TN.sum() + self.FP.sum())
+
+    @property
+    def micro_true_negative_rate(self):
+        """true negative Rate is defined as true negative / (true negative + false positive)"""
+        return self.TN.sum() / (self.TN.sum() + self.FN.sum())
+
+    @property
+    def micro_true_positive_rate(self):
+        """True positive rate is defined as true positive / true positive + false negative"""
+        return self.TP.sum() / (self.TP.sum() + self.FN.sum())
+
+    def export_metrics(self, metrics_to_include=None):
+        """Returns a DataFrame of all metrics defined in metrics.py
+        :param metrics_to_include: list of metrics to include in the summary output (must be defined in metrics.py)
+        :return: pandas DataFrame
+        """
+        if metrics_to_include is None:
+            metrics_to_include = __all_metrics__
+        return pd.DataFrame({metric: getattr(self, metric) for metric in metrics_to_include}).T.join(pd.DataFrame.from_dict({metric: getattr(self, f'micro_{metric}') for metric in metrics_to_include}, orient='index', columns=['micro-average']))
