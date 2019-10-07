@@ -177,4 +177,4 @@ class PandasConfusionMatrix:
         """
         if metrics_to_include is None:
             metrics_to_include = __all_metrics__
-        return pd.DataFrame({metric: getattr(self, metric) for metric in metrics_to_include}).T.join(pd.DataFrame.from_dict({metric: getattr(self, f'micro_{metric}') for metric in metrics_to_include}, orient='index', columns=['micro-average']))
+        return pd.DataFrame({metric: getattr(self, metric) for metric in metrics_to_include}).T.join(pd.DataFrame.from_dict({metric: getattr(self, 'micro_{}'.format(metric)) for metric in metrics_to_include}, orient='index', columns=['micro-average']))
