@@ -15,9 +15,13 @@ Since `pandas` version `0.23.0`, users can easily
 [register custom accessors](https://pandas.pydata.org/pandas-docs/stable/development/extending.html#extending-pandas),
  which is how `disarray` is implemented. This makes accessing confusion matrix metrics as easy as:  
  ```python
+>>> import pandas as pd
+>>> df = pd.DataFrame([[18, 1], [0, 1]])
 >>> import disarray
 >>> df.da.sensitivity
-0.95
+0    0.947368
+1    1.000000
+dtype: float64
 ```
 
 ## Table of contents
