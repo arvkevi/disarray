@@ -17,12 +17,18 @@ class PandasConfusionMatrix:
         # verify the input DataFrame is square
         x, y = obj.shape
         if x != y:
-            raise AttributeError("The input DataFrame must be an n x n square DataFrame")
+            raise AttributeError(
+                "The input DataFrame must be an n x n square DataFrame"
+            )
         if not all([dt == int for dt in obj.dtypes]):
-            raise AttributeError("The input DataFrame must contain only integers, but non-ints were detected.")
+            raise AttributeError(
+                "The input DataFrame must contain only integers, but non-ints were detected."
+            )
         if not (obj >= 0).all(axis=None):
-            raise AttributeError("The input DataFrame must contain all positive integers, but negative "
-                                 "ints were detected.")
+            raise AttributeError(
+                "The input DataFrame must contain all positive integers, but negative "
+                "ints were detected."
+            )
 
     @staticmethod
     def _calculate_metrics(obj):
@@ -47,7 +53,9 @@ class PandasConfusionMatrix:
     @property
     def f1(self):
         """F1 is the harmonic mean of precision and sensitivity"""
-        return 2 * ((self.precision * self.sensitivity) / (self.precision + self.sensitivity))
+        return 2 * (
+            (self.precision * self.sensitivity) / (self.precision + self.sensitivity)
+        )
 
     @property
     def false_discovery_rate(self):
@@ -108,12 +116,17 @@ class PandasConfusionMatrix:
     def micro_accuracy(self):
         """Accuracy is defined as (true positive + true negative) / (true positive + false positive + false negative +
          true negative)"""
-        return (self.TP.sum() + self.TN.sum()) / (self.TP.sum() + self.FP.sum() + self.FN.sum() + self.TN.sum())
+        return (self.TP.sum() + self.TN.sum()) / (
+            self.TP.sum() + self.FP.sum() + self.FN.sum() + self.TN.sum()
+        )
 
     @property
     def micro_f1(self):
         """F1 is the harmonic mean of precision and sensitivity"""
-        return 2 * ((self.micro_precision * self.micro_sensitivity) / (self.micro_precision + self.micro_sensitivity))
+        return 2 * (
+            (self.micro_precision * self.micro_sensitivity)
+            / (self.micro_precision + self.micro_sensitivity)
+        )
 
     @property
     def micro_false_discovery_rate(self):
@@ -177,4 +190,15 @@ class PandasConfusionMatrix:
         """
         if metrics_to_include is None:
             metrics_to_include = __all_metrics__
-        return pd.DataFrame({metric: getattr(self, metric) for metric in metrics_to_include}).T.join(pd.DataFrame.from_dict({metric: getattr(self, 'micro_{}'.format(metric)) for metric in metrics_to_include}, orient='index', columns=['micro-average']))
+        return pd.DataFrame(
+            {metric: getattr(self, metric) for metric in metrics_to_include}
+        ).T.join(
+            pd.DataFrame.from_dict(
+                {
+                    metric: getattr(self, "micro_{}".format(metric))
+                    for metric in metrics_to_include
+                },
+                orient="index",
+                columns=["micro-average"],
+            )
+        )
