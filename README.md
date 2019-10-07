@@ -1,4 +1,7 @@
 # disarray
+[![Build Status](https://travis-ci.com/arvkevi/disarray.svg?branch=master)](https://travis-ci.com/arvkevi/disarray)
+[![codecov](https://codecov.io/gh/arvkevi/disarray/branch/master/graph/badge.svg)](https://codecov.io/gh/arvkevi/disarray)
+
 This package calculates metrics derived from a confusion matrix and makes them directly accessible from a pandas 
 DataFrame. Simply install and import `disarray`. 
 
