@@ -34,6 +34,11 @@ dtype: float64
 - [Contributing](#contributing)
 
 ## Installation
+**Install using pip**
+```bash
+$ pip install disarray
+```
+
 **Clone from GitHub**
 ```bash
 $ git clone https://github.com/arvkevi/disarray.git
