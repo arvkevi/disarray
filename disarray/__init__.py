@@ -34,7 +34,10 @@ class PandasConfusionMatrix:
     def _calculate_metrics(obj):
         """
         Count the positive and negative instances for the actual and predicted class.
-        Code from: https://stackoverflow.com/a/43331484/4541548
+        Code very slightly modified from this StackOverflow answer by user lucidv01d,
+        https://stackoverflow.com/users/576134/lucidv01d
+        https://stackoverflow.com/a/43331484/4541548
+
         :param obj: A pandas DataFrame
         :return: Counts for true positive, false positive, false negative, and true negative
         """
