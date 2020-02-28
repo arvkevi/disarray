@@ -119,3 +119,7 @@ class TestDisarray(unittest.TestCase):
         self.assertAlmostEqual(self.df_multi.da.micro_true_positive_rate, 0.84, 2)
         self.assertAlmostEqual(self.df_multi.da.micro_true_positive_rate,
                                1 - self.df_multi.da.micro_false_negative_rate, 2)
+
+    def test_export_metrics(self):
+        cm = self.df_binary.da.export_metrics(metrics_to_include=None)
+        self.assertListEqual(cm.index.tolist(), __all_metrics__)
