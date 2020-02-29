@@ -1,4 +1,6 @@
 # disarray
+[![Downloads](https://pepy.tech/badge/disarray)](https://pepy.tech/project/disarray)
+[![Downloads](https://pepy.tech/badge/disarray/month)](https://pepy.tech/project/disarray/month)
 [![Build Status](https://travis-ci.com/arvkevi/disarray.svg?branch=master)](https://travis-ci.com/arvkevi/disarray)
 [![codecov](https://codecov.io/gh/arvkevi/disarray/branch/master/graph/badge.svg)](https://codecov.io/gh/arvkevi/disarray)
 
