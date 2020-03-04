@@ -7,6 +7,19 @@
 This package calculates metrics derived from a confusion matrix and makes them directly accessible from a pandas 
 DataFrame. Simply install and import `disarray`. 
 
+ ```python
+import pandas as pd
+
+df = pd.DataFrame([[18, 1], [0, 1]])
+
+import disarray
+
+df.da.sensitivity
+0    0.947368
+1    1.000000
+dtype: float64
+```
+
 **Why disarray?**  
 Working with a [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) is an everyday occurrence for most 
 data science projects. Sometimes, a data scientist is responsible for generating a confusion matrix using machine 
@@ -15,21 +28,12 @@ matrices directly as [pandas](https://pandas.pydata.org/) DataFrames.
  
 Since `pandas` version `0.23.0`, users can easily
 [register custom accessors](https://pandas.pydata.org/pandas-docs/stable/development/extending.html#extending-pandas),
- which is how `disarray` is implemented. This makes accessing confusion matrix metrics as easy as:  
- ```python
->>> import pandas as pd
->>> df = pd.DataFrame([[18, 1], [0, 1]])
->>> import disarray
->>> df.da.sensitivity
-0    0.947368
-1    1.000000
-dtype: float64
-```
+ which is how `disarray` is implemented.
 
 ## Table of contents
 - [Installation](#installation)
 - [Usage](#usage)
-    * [sample counts](#sample-counts)
+    * [class counts](#class-counts)
     * [export metrics](#export-metrics)
     * [multi-class classification](#multi-class-classification)
     * [supported metrics](#supported-metrics)
@@ -85,8 +89,8 @@ print(df.da.sensitivity)
 1    1.000000
 ```
 
-### Sample Counts
-`disarray` stores per-class sample counts of true positives, false positives, false negatives, and true negatives. 
+### Class Counts
+`disarray` stores per-class counts of true positives, false positives, false negatives, and true negatives. 
 Each of these are stored as capitalized abbreviations, `TP`, `FP`, `FN`, and `TN`.
 
 ```python
