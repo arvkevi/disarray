@@ -4,11 +4,11 @@
 [![Build Status](https://travis-ci.com/arvkevi/disarray.svg?branch=master)](https://travis-ci.com/arvkevi/disarray)
 [![codecov](https://codecov.io/gh/arvkevi/disarray/branch/master/graph/badge.svg)](https://codecov.io/gh/arvkevi/disarray)
 
-`disarray` calculates metrics derived from a confusion matrix and makes them directly accessible from a pandas DataFrame. Simply install and import `disarray`. 
+`disarray` calculates metrics derived from a confusion matrix and makes them directly accessible from a pandas DataFrame.
 
 ![disarray demo](demo/disarray_demo.gif)
 
-If you are already using `pandas`, then `disarray` is easy to use:
+If you are already using `pandas`, then `disarray` is easy to use, simply import `disarray`:
  ```python
 import pandas as pd
 
