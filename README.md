@@ -8,7 +8,7 @@
 
 ![disarray demo](demo/disarray_demo.gif)
 
-If you are already using `pandas`, then `disarray` is easy to use, simply import `disarray`:
+If you are already using [`pandas`](https://pandas.pydata.org/), then `disarray` is easy to use, simply import `disarray`:
  ```python
 import pandas as pd
 
@@ -79,9 +79,9 @@ import disarray
 import pandas as pd
 
 df = pd.DataFrame(cm)
-print(df.da.sensitivity)
-0    0.866667
-1    1.000000
+# access metrics for each class by index
+print(df.da.precision[1])
+0.83
 ```
 
 ### Class Counts
