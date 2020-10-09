@@ -1,27 +1,26 @@
-name: Publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+name: Upload Python Package
 
-on: push
+on:
+  release:
+    types: [created]
+
 jobs:
-  build-n-publish:
-    name: Build and publish Python 🐍 distributions 📦 to PyPI
-    runs-on: ubuntu-18.04
+  deploy:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Set up Python 3.7
+    - uses: actions/checkout@v1
+    - name: Set up Python
       uses: actions/setup-python@v1
       with:
-        python-version: 3.7
-    - name: install wheel
-      run: >-
-        pip install wheel
-    - name: build
-      run: >-
-        python
-        setup.py
-        sdist
-        bdist_wheel
-    - name: Publish distribution 📦 to PyPI
-      if: startsWith(github.event.ref, 'refs/tags')
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        password: ${{ secrets.pypi_password }}
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install setuptools wheel twine
+    - name: Build and publish
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: |
+        python setup.py sdist bdist_wheel
+        twine upload dist/*
