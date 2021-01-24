@@ -23,7 +23,7 @@ jobs:
       - name: coverage
         run: |
           pip install coverage
-          coverage run tests.py
+          coverage run tests/test_disarray.py
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
