@@ -4,9 +4,11 @@
 [![Build Status](https://travis-ci.com/arvkevi/disarray.svg?branch=master)](https://travis-ci.com/arvkevi/disarray)
 [![codecov](https://codecov.io/gh/arvkevi/disarray/branch/master/graph/badge.svg)](https://codecov.io/gh/arvkevi/disarray)
 
-This package calculates metrics derived from a confusion matrix and makes them directly accessible from a pandas 
-DataFrame. Simply install and import `disarray`. 
+`disarray` calculates metrics derived from a confusion matrix and makes them directly accessible from a pandas DataFrame.
 
+![disarray demo](demo/disarray_demo.gif)
+
+If you are already using [`pandas`](https://pandas.pydata.org/), then `disarray` is easy to use, simply import `disarray`:
  ```python
 import pandas as pd
 
@@ -20,23 +22,15 @@ df.da.sensitivity
 dtype: float64
 ```
 
-**Why disarray?**  
-Working with a [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) is an everyday occurrence for most 
-data science projects. Sometimes, a data scientist is responsible for generating a confusion matrix using machine 
-learning libraries like [scikit-learn](https://scikit-learn.org/stable/). But it's not uncommon to work with confusion 
-matrices directly as [pandas](https://pandas.pydata.org/) DataFrames. 
- 
-Since `pandas` version `0.23.0`, users can easily
-[register custom accessors](https://pandas.pydata.org/pandas-docs/stable/development/extending.html#extending-pandas),
- which is how `disarray` is implemented.
-
 ## Table of contents
 - [Installation](#installation)
 - [Usage](#usage)
+    * [binary classification](#binary-classification)
     * [class counts](#class-counts)
     * [export metrics](#export-metrics)
     * [multi-class classification](#multi-class-classification)
     * [supported metrics](#supported-metrics)
+- [Why disarray](#why-disarray?)
 - [Contributing](#contributing)
 
 ## Installation
@@ -55,6 +49,8 @@ $ python setup.py install
 The `disarray` package is intended to be used similar to a `pandas` attribute or method. `disarray` is registered as 
 a `pandas` extension under `da`. For a DataFrame named `df`, access the library using `df.da.`.
 
+
+### Binary Classification
 To understand the input and usage for `disarray`, build an example confusion matrix for a **binary classification**
  problem from scratch with `scikit-learn`.   
 (You can install the packages you need to run the demo with: `pip install -r requirements.demo.txt`)
@@ -76,22 +72,20 @@ print(cm)
  [ 0 10]]
 ```
 
-Using `disarray` is as easy as importing it and instantiating a DataFrame object from a **square** array of **positive** 
-integers.
+Using `disarray` is as easy as importing it and instantiating a DataFrame object from a **square** array of **positive** integers.
 
 ```python
 import disarray
 import pandas as pd
 
 df = pd.DataFrame(cm)
-print(df.da.sensitivity)
-0    0.866667
-1    1.000000
+# access metrics for each class by index
+print(df.da.precision[1])
+0.83
 ```
 
 ### Class Counts
-`disarray` stores per-class counts of true positives, false positives, false negatives, and true negatives. 
-Each of these are stored as capitalized abbreviations, `TP`, `FP`, `FN`, and `TN`.
+`disarray` stores per-class counts of true positives, false positives, false negatives, and true negatives. Each of these are stored as capitalized abbreviations, `TP`, `FP`, `FN`, and `TN`.
 
 ```python
 df.da.TP
@@ -112,8 +106,8 @@ df.da.export_metrics(metrics_to_include=['precision', 'recall', 'f1'])
 ```
 |           |        0 |        1 |   micro-average |
 |-----------|----------|----------|-----------------|
-| precision | 1        | 0.833333 |            0.92 |
-| recall    | 0.866667 | 1        |            0.92 |
+| precision | 1.0      | 0.833333 |            0.92 |
+| recall    | 0.866667 | 1.0      |            0.92 |
 | f1        | 0.928571 | 0.909091 |            0.92 |
 
 
@@ -179,9 +173,9 @@ df.da.export_metrics(metrics_to_include=['sensitivity', 'specificity', 'f1'])
 
 |             |   setosa |   versicolor |   virginica |   micro-average |
 |-------------|----------|--------------|-------------|-----------------|
-| sensitivity |        1 |     0.625    |    1        |        0.842105 |
-| specificity |        1 |     1        |    0.793103 |        0.921053 |
-| f1          |        1 |     0.769231 |    0.75     |        0.842105 |
+| sensitivity |      1.0 |     0.625    |    1.0      |        0.842105 |
+| specificity |      1.0 |     1.0      |    0.793103 |        0.921053 |
+| f1          |      1.0 |     0.769231 |    0.75     |        0.842105 |
 
 ### Supported Metrics
 ```python
@@ -200,6 +194,14 @@ df.da.export_metrics(metrics_to_include=['sensitivity', 'specificity', 'f1'])
 'true_positive_rate',
 ```
 As well as micro-averages for each of these, accessible via `df.da.micro_recall`, for example.
+
+## Why disarray?
+
+Working with a [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) is common in data science projects. It is useful to have performance metrics available directly from [pandas](https://pandas.pydata.org/) DataFrames. 
+ 
+Since `pandas` version `0.23.0`, users can easily
+[register custom accessors](https://pandas.pydata.org/pandas-docs/stable/development/extending.html#extending-pandas),
+ which is how `disarray` is implemented.
 
 ## Contributing
 

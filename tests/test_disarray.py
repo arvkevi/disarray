@@ -28,13 +28,13 @@ class TestDisarray(unittest.TestCase):
         self.assertCountEqual(__all_metrics__, detected_metrics)
 
     def test_accuracy(self):
-        self.assertAlmostEqual(self.df_binary.da.accuracy.loc[0], 0.80, 2)
+        self.assertAlmostEqual(self.df_binary.da.accuracy.loc[1], 0.80, 2)
         self.assertAlmostEqual(self.df_binary.da.micro_accuracy, 0.80, 2)
         self.assertAlmostEqual(self.df_multi.da.accuracy.loc["setosa"], 1.0, 2)
         self.assertAlmostEqual(self.df_multi.da.micro_accuracy, 0.89, 2)
 
     def test_f1(self):
-        self.assertAlmostEqual(self.df_binary.da.f1.loc[0], 0.83, 2)
+        self.assertAlmostEqual(self.df_binary.da.f1.loc[1], 0.75, 2)
         self.assertAlmostEqual(self.df_binary.da.micro_f1, 0.80, 2)
         self.assertAlmostEqual(self.df_multi.da.f1.loc["setosa"], 1.0, 2)
         self.assertAlmostEqual(self.df_multi.da.micro_f1, 0.84, 2)
@@ -130,7 +130,7 @@ class TestDisarray(unittest.TestCase):
         )
 
     def test_precision(self):
-        self.assertAlmostEqual(self.df_binary.da.precision.loc[0], 0.83, 2)
+        self.assertAlmostEqual(self.df_binary.da.precision.loc[1], 0.75, 2)
         self.assertAlmostEqual(self.df_binary.da.micro_precision, 0.80, 2)
         self.assertAlmostEqual(self.df_multi.da.precision.loc["setosa"], 1.0, 2)
         self.assertAlmostEqual(self.df_multi.da.micro_precision, 0.84, 2)
@@ -141,7 +141,7 @@ class TestDisarray(unittest.TestCase):
         )
 
     def test_recall(self):
-        self.assertAlmostEqual(self.df_binary.da.recall.loc[0], 0.83, 2)
+        self.assertAlmostEqual(self.df_binary.da.recall.loc[1], 0.75, 2)
         self.assertAlmostEqual(self.df_binary.da.micro_recall, 0.80, 2)
         self.assertAlmostEqual(self.df_multi.da.recall.loc["setosa"], 1.0, 2)
         self.assertAlmostEqual(self.df_multi.da.micro_recall, 0.84, 2)
