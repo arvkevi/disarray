@@ -23,9 +23,8 @@ jobs:
           python -m unittest tests/test_disarray.py
       - name: coverage
         run: |
-          pip install coverage
-          coverage run tests/test_disarray.py
-      - name: Upload coverage to Codecov
+          pip install pytest-cov
+          py.test --cov-report=xml --cov=myproj tests/test_disarray.py
         uses: codecov/codecov-action@v1
         with:
           fail_ci_if_error: true
