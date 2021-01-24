@@ -12,7 +12,8 @@ If you are already using [`pandas`](https://pandas.pydata.org/), then `disarray`
  ```python
 import pandas as pd
 
-df = pd.DataFrame([[18, 1], [0, 1]])
+# dtype=int is important for Windows users
+df = pd.DataFrame([[18, 1], [0, 1]], dtype=int)
 
 import disarray
 
@@ -78,7 +79,8 @@ Using `disarray` is as easy as importing it and instantiating a DataFrame object
 import disarray
 import pandas as pd
 
-df = pd.DataFrame(cm)
+# dtype=int is important for Windows users
+df = pd.DataFrame(cm, dtype=int)
 # access metrics for each class by index
 print(df.da.precision[1])
 0.83
@@ -130,7 +132,8 @@ y_pred = classifier.fit(X_train, y_train).predict(X_test)
 cm = confusion_matrix(y_test, y_pred)
 
 # Instantiate the confusion matrix DataFrame with index and columns
-df = pd.DataFrame(cm, index=class_names, columns=class_names)
+# dtype=int is important for Windows users
+df = pd.DataFrame(cm, index=class_names, columns=class_names, dtype=int)
 print(df)
 ```
 |            |   setosa |   versicolor |   virginica |
