@@ -24,7 +24,7 @@ jobs:
       - name: coverage
         run: |
           pip install pytest-cov
-          py.test --cov-report=xml --cov=myproj tests/test_disarray.py
+          py.test --cov-report=xml --cov=disarray tests/test_disarray.py
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
